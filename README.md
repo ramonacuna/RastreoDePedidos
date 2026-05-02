@@ -58,5 +58,12 @@ Dado que actualmente la aplicación funciona con datos simulados (mock data), pu
 | **`TRK00001`** | *En tránsito* | Manizales a Santa Marta. |
 | **`TRK00002`** | *En reparto* | Bucaramanga a Cúcuta. |
 | **`TRK00003`** | *Entregado* | Pereira a Armenia. |
+| **`TRK00004`** | *En tránsito* | Ibagué a Villavicencio. |
+| **`TRK00005`** | *En reparto* | Neiva a Florencia. |
+| **`TRK00006`** | *En tránsito* | Sincelejo a Montería. |
+| **`TRK00007`** | *Entregado* | Pastos a Ipiales. |
+| **`TRK00008`** | *En tránsito* | Quibdó a Medellín. |
+| **`TRK00009`** | *En reparto* | Tunja a Sogamoso. |
+| **`TRK00010`** | *En tránsito* | Riohacha a Valledupar. |
 
 Si ingresas cualquier otro número, la aplicación mostrará un mensaje indicando que el número de guía no fue encontrado.
