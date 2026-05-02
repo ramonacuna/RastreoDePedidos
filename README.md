@@ -43,7 +43,13 @@ Aplicación web moderna y dinámica para consultar el estado y la ubicación de 
    python app.py
    ```
 
-5. **Acceder a la aplicación**:
+5. **Ejecutar con uv (Recomendado por velocidad)**:
+   Si prefieres usar [uv](https://github.com/astral-sh/uv), puedes correr la aplicación directamente instalando las dependencias en una sola línea:
+   ```bash
+   uv run --with flask python app.py
+   ```
+
+6. **Acceder a la aplicación**:
    Abre tu navegador web y visita: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ## Datos de Prueba
