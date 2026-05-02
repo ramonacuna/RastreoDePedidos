@@ -34,6 +34,98 @@ mock_packages = {
             {"date": "2026-05-01 16:20", "location": "Cartagena", "description": "Paquete entregado al destinatario."},
             {"date": "2026-05-01 09:10", "location": "Cartagena", "description": "En reparto."}
         ]
+    },
+    "TRK00001": {
+        "status": "En tránsito",
+        "origin": "Manizales, COL",
+        "destination": "Santa Marta, COL",
+        "estimatedDelivery": "2026-05-06",
+        "events": [
+            {"date": "2026-05-02 12:00", "location": "Manizales", "description": "Paquete recibido en origen."},
+            {"date": "2026-05-02 15:00", "location": "Manizales", "description": "En procesamiento."}
+        ]
+    },
+    "TRK00002": {
+        "status": "En reparto",
+        "origin": "Bucaramanga, COL",
+        "destination": "Cúcuta, COL",
+        "estimatedDelivery": "2026-05-02",
+        "events": [
+            {"date": "2026-05-02 07:00", "location": "Cúcuta", "description": "Llegada a oficina de destino."},
+            {"date": "2026-05-02 09:30", "location": "Cúcuta", "description": "En reparto local."}
+        ]
+    },
+    "TRK00003": {
+        "status": "Entregado",
+        "origin": "Pereira, COL",
+        "destination": "Armenia, COL",
+        "estimatedDelivery": "2026-04-28",
+        "events": [
+            {"date": "2026-04-28 14:00", "location": "Armenia", "description": "Entregado satisfactoriamente."}
+        ]
+    },
+    "TRK00004": {
+        "status": "En tránsito",
+        "origin": "Ibagué, COL",
+        "destination": "Villavicencio, COL",
+        "estimatedDelivery": "2026-05-07",
+        "events": [
+            {"date": "2026-05-01 11:00", "location": "Ibagué", "description": "Saliendo de origen."}
+        ]
+    },
+    "TRK00005": {
+        "status": "En reparto",
+        "origin": "Neiva, COL",
+        "destination": "Florencia, COL",
+        "estimatedDelivery": "2026-05-02",
+        "events": [
+            {"date": "2026-05-02 08:00", "location": "Florencia", "description": "Asignado a mensajero."}
+        ]
+    },
+    "TRK00006": {
+        "status": "En tránsito",
+        "origin": "Sincelejo, COL",
+        "destination": "Montería, COL",
+        "estimatedDelivery": "2026-05-04",
+        "events": [
+            {"date": "2026-05-01 16:00", "location": "Sincelejo", "description": "En bodega central."}
+        ]
+    },
+    "TRK00007": {
+        "status": "Entregado",
+        "origin": "Pastos, COL",
+        "destination": "Ipiales, COL",
+        "estimatedDelivery": "2026-04-30",
+        "events": [
+            {"date": "2026-04-30 11:30", "location": "Ipiales", "description": "Recibido por el portero."}
+        ]
+    },
+    "TRK00008": {
+        "status": "En tránsito",
+        "origin": "Quibdó, COL",
+        "destination": "Medellín, COL",
+        "estimatedDelivery": "2026-05-08",
+        "events": [
+            {"date": "2026-05-02 14:00", "location": "Quibdó", "description": "Recogido en domicilio."}
+        ]
+    },
+    "TRK00009": {
+        "status": "En reparto",
+        "origin": "Tunja, COL",
+        "destination": "Sogamoso, COL",
+        "estimatedDelivery": "2026-05-02",
+        "events": [
+            {"date": "2026-05-02 10:15", "location": "Sogamoso", "description": "En camioneta de entrega."}
+        ]
+    },
+    "TRK00010": {
+        "status": "En tránsito",
+        "origin": "Riohacha, COL",
+        "destination": "Valledupar, COL",
+        "estimatedDelivery": "2026-05-05",
+        "events": [
+            {"date": "2026-05-02 09:00", "location": "Riohacha", "description": "Paquete documentado."}
+        ]
     }
 }
 

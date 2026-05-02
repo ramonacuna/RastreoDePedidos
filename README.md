@@ -55,5 +55,8 @@ Dado que actualmente la aplicación funciona con datos simulados (mock data), pu
 | **`TRK12345`** | *En reparto* | Muestra el paquete avanzando, actualmente en reparto de Bogotá a Medellín. |
 | **`TRK98765`** | *En tránsito* | Muestra el paquete en ruta (a la mitad), viajando de Cali a Barranquilla. |
 | **`TRK11111`** | *Entregado* | Muestra el paquete totalmente completado y entregado en Cartagena. |
+| **`TRK00001`** | *En tránsito* | Manizales a Santa Marta. |
+| **`TRK00002`** | *En reparto* | Bucaramanga a Cúcuta. |
+| **`TRK00003`** | *Entregado* | Pereira a Armenia. |
 
 Si ingresas cualquier otro número, la aplicación mostrará un mensaje indicando que el número de guía no fue encontrado.
