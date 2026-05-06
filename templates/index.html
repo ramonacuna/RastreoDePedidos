@@ -31,6 +31,7 @@
             <form id="tracking-form" class="search-form">
                 <div class="input-group">
                     <input type="text" id="tracking-input" placeholder="Ej: TRK12345" required autocomplete="off">
+                    <button type="button" id="clear-btn" class="clear-btn hidden" title="Limpiar búsqueda">&times;</button>
                     <button type="submit" id="search-btn">
                         <span>Buscar</span>
                         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -40,13 +41,21 @@
                     </button>
                 </div>
             </form>
+            <div id="recent-searches" class="recent-searches hidden">
+                <span>Recientes:</span>
+                <div id="recent-list" class="recent-list"></div>
+            </div>
             <div id="loading-spinner" class="spinner hidden"></div>
             <div id="error-message" class="error hidden"></div>
         </section>
 
         <section id="results-section" class="results-section hidden">
             <div class="package-header">
-                <h2>Estado del Paquete: <span id="pkg-id"></span></h2>
+                <h2>Estado: <span id="pkg-id"></span> 
+                    <button id="copy-btn" class="copy-btn" title="Copiar número de guía">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 17.7c0 .6.4 1 1 1h10c.6 0 1-.4 1-1V7.1c0-.6-.4-1-1-1H9c-.6 0-1 .4-1 1v10.6Z"/><path d="M15 3.9c0-.6-.4-1-1-1H4c-.6 0-1 .4-1 1v10.6c0 .6.4 1 1 1h2"/></svg>
+                    </button>
+                </h2>
                 <div class="status-badge" id="pkg-status"></div>
             </div>
 

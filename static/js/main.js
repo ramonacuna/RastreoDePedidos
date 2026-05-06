@@ -14,6 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const pkgEvents = document.getElementById('pkg-events');
     const pkgProgress = document.getElementById('pkg-progress');
     const truckIcon = document.querySelector('.truck-icon');
+    const searchBtn = document.getElementById('search-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const recentSearches = document.getElementById('recent-searches');
+    const recentList = document.getElementById('recent-list');
+
+    // Initialize Recent Searches
+    renderRecentSearches();
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -25,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
         errorMsg.classList.add('hidden');
         resultsSection.classList.add('hidden');
         spinner.classList.remove('hidden');
+        searchBtn.disabled = true;
+        searchBtn.querySelector('span').textContent = 'Buscando...';
 
         try {
             // Artificial delay for smooth UX transition
@@ -43,8 +53,76 @@ document.addEventListener('DOMContentLoaded', () => {
             showError("Hubo un error al conectar con el servidor. Intenta nuevamente.");
         } finally {
             spinner.classList.add('hidden');
+            searchBtn.disabled = false;
+            searchBtn.querySelector('span').textContent = 'Buscar';
         }
     });
+
+    // Clear input functionality
+    input.addEventListener('input', () => {
+        if (input.value.length > 0) {
+            clearBtn.classList.remove('hidden');
+        } else {
+            clearBtn.classList.add('hidden');
+        }
+    });
+
+    clearBtn.addEventListener('click', () => {
+        input.value = '';
+        clearBtn.classList.add('hidden');
+        input.focus();
+    });
+
+    // Copy to clipboard
+    copyBtn.addEventListener('click', async () => {
+        const textToCopy = pkgId.textContent;
+        try {
+            await navigator.clipboard.writeText(textToCopy);
+            copyBtn.classList.add('copied');
+            const originalTitle = copyBtn.getAttribute('title');
+            copyBtn.setAttribute('title', '¡Copiado!');
+            
+            setTimeout(() => {
+                copyBtn.classList.remove('copied');
+                copyBtn.setAttribute('title', originalTitle);
+            }, 2000);
+        } catch (err) {
+            console.error('Error al copiar: ', err);
+        }
+    });
+
+    function saveRecentSearch(id) {
+        let recents = JSON.parse(localStorage.getItem('recentTracking')) || [];
+        // Remove if already exists and add to front
+        recents = recents.filter(item => item !== id);
+        recents.unshift(id);
+        // Keep last 3
+        recents = recents.slice(0, 3);
+        localStorage.setItem('recentTracking', JSON.stringify(recents));
+        renderRecentSearches();
+    }
+
+    function renderRecentSearches() {
+        const recents = JSON.parse(localStorage.getItem('recentTracking')) || [];
+        if (recents.length === 0) {
+            recentSearches.classList.add('hidden');
+            return;
+        }
+
+        recentSearches.classList.remove('hidden');
+        recentList.innerHTML = '';
+        recents.forEach(id => {
+            const pill = document.createElement('div');
+            pill.className = 'recent-pill';
+            pill.textContent = id;
+            pill.onclick = () => {
+                input.value = id;
+                clearBtn.classList.remove('hidden');
+                form.dispatchEvent(new Event('submit'));
+            };
+            recentList.appendChild(pill);
+        });
+    }
 
     function showError(message) {
         errorMsg.textContent = message;
@@ -55,6 +133,12 @@ document.addEventListener('DOMContentLoaded', () => {
         pkgId.textContent = trackingNumber;
         pkgOrigin.textContent = data.origin;
         pkgDestination.textContent = data.destination;
+        
+        // Update document title
+        document.title = `${trackingNumber} - Rastreo de Envío`;
+        
+        // Save to recent searches
+        saveRecentSearch(trackingNumber);
         
         // Format date slightly
         const dateObj = new Date(data.estimatedDelivery + "T00:00:00");

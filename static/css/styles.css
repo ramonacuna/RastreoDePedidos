@@ -423,10 +423,96 @@ body {
     line-height: 1.5;
 }
 
-/* Responsive */
+/* Clear Button */
+.clear-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.clear-btn:hover {
+    color: var(--text-main);
+    transform: scale(1.1);
+}
+
+/* Recent Searches */
+.recent-searches {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.recent-list {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.recent-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-main);
+}
+
+.recent-pill:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Copy Button */
+.copy-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 8px;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.copy-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.copy-btn:hover {
+    color: var(--primary);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.copy-btn.copied {
+    color: var(--success);
+}
+
+/* Responsive fixes */
 @media (max-width: 640px) {
     .input-group {
         flex-direction: column;
+        position: relative;
+    }
+    
+    .clear-btn {
+        position: absolute;
+        right: 10px;
+        top: 15px;
     }
     
     #search-btn {
