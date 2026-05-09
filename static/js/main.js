@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('tracking-input');
     const spinner = document.getElementById('loading-spinner');
     const errorMsg = document.getElementById('error-message');
+    const validationMsg = document.getElementById('validation-message');
     const resultsSection = document.getElementById('results-section');
     
     // UI Elements for Data
@@ -27,7 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const trackingNumber = input.value.trim();
         
-        if (!trackingNumber) return;
+        if (!trackingNumber) {
+            validationMsg.classList.remove('hidden');
+            input.classList.add('validation-error');
+            setTimeout(() => input.classList.remove('validation-error'), 500);
+            return;
+        }
 
         // Reset UI
         errorMsg.classList.add('hidden');
@@ -58,8 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Clear input functionality
+    // Clear input functionality and hide validation
     input.addEventListener('input', () => {
+        validationMsg.classList.add('hidden');
+        input.classList.remove('validation-error');
+        
         if (input.value.length > 0) {
             clearBtn.classList.remove('hidden');
         } else {
@@ -149,12 +158,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const statusNormalized = data.status.toLowerCase().replace(/\s+/g, '-');
         pkgStatus.textContent = data.status;
         pkgStatus.className = `status-badge status-${statusNormalized}`;
+        
+        // Delayed Delivery Indicator
+        const delayContainer = document.getElementById('delay-badge-container');
+        const today = new Date();
+        today.setHours(0,0,0,0);
+        if (dateObj < today && statusNormalized !== 'entregado') {
+            delayContainer.innerHTML = '<span class="delay-badge">⚠️ Entrega retrasada</span>';
+        } else {
+            delayContainer.innerHTML = '';
+        }
 
         // Progress bar logic based on status
         let progress = 0;
         if (statusNormalized === 'entregado') progress = 100;
-        else if (statusNormalized === 'en-reparto') progress = 80;
-        else if (statusNormalized === 'en-tránsito') progress = 50;
+        else if (statusNormalized === 'en-reparto') progress = 66;
+        else if (statusNormalized === 'en-tránsito') progress = 33;
         else progress = 10;
 
         // Handle responsive logic for progress
@@ -187,17 +206,49 @@ document.addEventListener('DOMContentLoaded', () => {
         data.events.forEach((event, index) => {
             const li = document.createElement('li');
             li.className = 'timeline-item';
-            li.style.animationDelay = `${index * 0.15}s`;
+            li.style.animationDelay = `${index * 0.1}s`;
+            
+            if (index >= 5) {
+                li.classList.add('hidden-event');
+            }
 
-            li.innerHTML = `
-                <div class="timeline-date">${event.date}</div>
-                <div class="timeline-content">
-                    <div class="timeline-location">📍 ${event.location}</div>
-                    <div class="timeline-desc">${event.description}</div>
-                </div>
-            `;
+            const dateDiv = document.createElement('div');
+            dateDiv.className = 'timeline-date';
+            dateDiv.textContent = event.date;
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'timeline-content';
+
+            const locationDiv = document.createElement('div');
+            locationDiv.className = 'timeline-location';
+            locationDiv.textContent = `📍 ${event.location}`;
+
+            const descDiv = document.createElement('div');
+            descDiv.className = 'timeline-desc';
+            descDiv.textContent = event.description;
+
+            contentDiv.appendChild(locationDiv);
+            contentDiv.appendChild(descDiv);
+            li.appendChild(dateDiv);
+            li.appendChild(contentDiv);
             pkgEvents.appendChild(li);
         });
+        
+        // Pagination logic
+        if (data.events.length > 5) {
+            const btnContainer = document.createElement('div');
+            btnContainer.className = 'show-all-container';
+            const btn = document.createElement('button');
+            btn.className = 'show-all-btn';
+            btn.textContent = `Ver todos (${data.events.length})`;
+            btn.onclick = () => {
+                const hiddenEvents = pkgEvents.querySelectorAll('.hidden-event');
+                hiddenEvents.forEach(el => el.classList.remove('hidden-event'));
+                btnContainer.remove();
+            };
+            btnContainer.appendChild(btn);
+            pkgEvents.appendChild(btnContainer);
+        }
     }
 
     // Handle resize for progress bar correctness
